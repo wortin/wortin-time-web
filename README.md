@@ -2,7 +2,13 @@
 
 我丁时间管理网页端
 
-## 项目创建
+## 项目思路和设计
+
+[文档](./docs/thought.md)
+
+## 项目开发
+
+### 创建
 
 使用umi框架创建
 
@@ -11,7 +17,7 @@ yarn create @umijs/umi-app
 yarn
 ```
 
-## 新建路由
+### 新建路由
 
 ```shell
 npx umi g page products --typescript
@@ -31,7 +37,7 @@ export default defineConfig({
 });
 ```
 
-## 启动应用
+### 启动应用
 
 安装依赖
 
