@@ -1,10 +1,9 @@
 import React from 'react';
-import styles from './todo.css';
+import { TimeLayout } from '@/components/timelayout';
+import { TimeMenuItems, ToDoTimeLayOutData } from '@/models/timelayout';
 
 export default function Page() {
   return (
-    <div>
-      <h1 className={styles.title}>Page todo</h1>
-    </div>
+    <TimeLayout activeItem={ToDoTimeLayOutData} menuItems={TimeMenuItems} />
   );
 }

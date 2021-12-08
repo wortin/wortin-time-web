@@ -1,10 +1,8 @@
-import styles from './index.less';
-import { Breadcrumb, Layout, Menu } from 'antd';
-import { useState } from 'react';
 import { TimeLayout } from '@/components/timelayout';
-
-const { Header, Content, Footer } = Layout;
+import { TimeMenuItems, ToDoTimeLayOutData } from '@/models/timelayout';
 
 export default function IndexPage() {
-  return <TimeLayout />;
+  return (
+    <TimeLayout activeItem={ToDoTimeLayOutData} menuItems={TimeMenuItems} />
+  );
 }
