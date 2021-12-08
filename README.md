@@ -20,7 +20,7 @@ yarn
 ### 新建路由
 
 ```shell
-npx umi g page products --typescript
+npx umi g page todo --typescript
 ```
 
 在 .umirc.ts 中配置路由
@@ -50,5 +50,7 @@ yarn
 ```bash
 yarn start
 ```
+
+本地启动后，一般默认是8000，即 http://localhost:8000
 
 
