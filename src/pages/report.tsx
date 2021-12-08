@@ -1,6 +1,6 @@
 import React from 'react';
 import { TimeLayout } from '@/components/timelayout';
-import { ReportTimeLayOutData, TimeMenuItems } from '@/models/timelayout';
+import { ReportTimeLayOutData, TimeMenuItems } from '@/data/timelayout';
 
 export default function Page() {
   return (
