@@ -1,4 +1,4 @@
-import { TimeLineData } from '@/models/timeline';
+import { TimeLineData } from '@/bo/timeline';
 
 export const TimeLineItems: Array<TimeLineData> = [
   { time: '07:00' },

@@ -3,7 +3,7 @@ import { Layout, Menu } from 'antd';
 
 import styles from './timelayout.css';
 import { Link } from 'umi';
-import { TimeLayOutData } from '@/models/timelayout';
+import { TimeLayOutData } from '@/bo/timelayout';
 
 const { Header, Content, Footer } = Layout;
 
@@ -14,9 +14,16 @@ export const TimeLayout: React.FC<{
 }> = ({ activeItem, menuItems }) => {
   return (
     <Layout>
-      <Header style={{ position: 'fixed', zIndex: 1, width: '100%' }}>
+      <Header
+        style={{
+          position: 'fixed',
+          zIndex: 1,
+          width: '100%',
+          background: '#fff',
+        }}
+      >
         <div className={styles.logo} />
-        <Menu theme="dark" mode="horizontal" selectedKeys={[activeItem.key]}>
+        <Menu mode="horizontal" selectedKeys={[activeItem.key]}>
           {menuItems.map(({ key, title }) => {
             return (
               <Menu.Item key={key}>

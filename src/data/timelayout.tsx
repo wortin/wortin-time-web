@@ -1,9 +1,9 @@
-import { ToDoContent } from '@/components/todo';
+import { ToDoContent } from '@/components/todo/ToDoContent';
 import { ProjectContent } from '@/components/project';
 import { ReportContent } from '@/components/report';
 import { TargetContent } from '@/components/target';
 import { FeatureContent } from '@/components/feature';
-import { TimeLayOutData } from '@/models/timelayout';
+import { TimeLayOutData } from '@/bo/timelayout';
 
 export const ToDoTimeLayOutData: TimeLayOutData = {
   key: 'todo',

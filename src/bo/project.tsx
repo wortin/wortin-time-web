@@ -1,5 +1,5 @@
-import { ProjectType } from '@/models/project-type';
-import { ProjectState } from '@/models/project-state';
+import { ProjectType } from '@/bo/project-type';
+import { ProjectState } from '@/bo/project-state';
 
 export interface ProjectModel {
   id: string; // 主键
