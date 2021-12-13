@@ -1,9 +1,24 @@
 import React from 'react';
-import { Col, Row, Select, Tag } from 'antd';
+import { Col, Input, Row, Select, Tag } from 'antd';
 
 export const TriflesEdit: React.FC<{}> = ({}) => {
   return (
     <div style={{ color: '#87898a', margin: '10px 20px' }}>
+      <Row>
+        <Input
+          placeholder="输入动作名，回车即可创建"
+          bordered={false}
+          style={{
+            border: 'none',
+            background: '#eee',
+            padding: '5px 10px',
+            width: '100%',
+          }}
+        />
+      </Row>
+      <Row style={{ fontSize: '10px', marginTop: '30px' }}>
+        你可以根据标签筛选动作：
+      </Row>
       <Row align={'middle'} style={{ margin: '10px 0' }}>
         <Col span={24}>
           <Select

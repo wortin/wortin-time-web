@@ -5,18 +5,6 @@ export const TriflesAct: React.FC<{}> = ({}) => {
   return (
     <div style={{ margin: '30px 20px 0 20px' }}>
       <Row>
-        <Input
-          placeholder="输入动作名，回车即可创建"
-          bordered={false}
-          style={{
-            border: 'none',
-            background: '#eee',
-            padding: '5px 10px',
-            width: '100%',
-          }}
-        />
-      </Row>
-      <Row>
         <List
           dataSource={[{}, {}]}
           style={{ width: '100%', marginTop: '10px' }}

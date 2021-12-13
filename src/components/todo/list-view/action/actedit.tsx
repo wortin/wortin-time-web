@@ -34,7 +34,7 @@ export const ActEdit: React.FC<{}> = ({}) => {
         <Col span={18}>
           <Select
             mode="tags"
-            style={{ border: 'none', width: '98%' }}
+            style={{ border: 'none', width: '100%' }}
             placeholder="选择或输入新标签回车后创建"
             onChange={() => {}}
           >
@@ -42,7 +42,6 @@ export const ActEdit: React.FC<{}> = ({}) => {
             bordered={false}
             {[]}
           </Select>
-          ,
         </Col>
       </Row>
       <Row align={'top'} style={{ marginTop: '10px' }}>

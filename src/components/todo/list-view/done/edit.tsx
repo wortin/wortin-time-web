@@ -4,6 +4,7 @@ import { Col, Row, Select, Tag } from 'antd';
 export const DoneEdit: React.FC<{}> = ({}) => {
   return (
     <div style={{ color: '#87898a', margin: '10px 20px' }}>
+      <Row style={{ fontSize: '10px' }}>你可以根据标签筛选动作：</Row>
       <Row align={'middle'} style={{ margin: '10px 0' }}>
         <Col span={24}>
           <Select
