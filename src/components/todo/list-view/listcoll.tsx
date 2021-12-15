@@ -1,13 +1,21 @@
 import React, { KeyboardEvent, useState } from 'react';
 import { Col, Collapse, Input, List, Row } from 'antd';
-import { PlusOutlined } from '@ant-design/icons';
-import { Post, Get } from '@/data/api';
+import { Get, Post } from '@/data/api';
 import styles from '@/components/todo/list-view/listcoll.less';
 
+const pageSize: number = 10;
+let isInit: boolean = true;
+
 export const ListColl: React.FC<{}> = ({}) => {
-  const pageSize: number = 10;
   const [projects, setProjects] = useState([]);
   const [total, setTotal] = useState<number>(0);
+  if (isInit) {
+    Get('/projects?pageNo=1&pageSize=' + pageSize, function (d) {
+      setProjects(d.projects);
+      setTotal(d.total);
+    });
+    isInit = false;
+  }
   return (
     <Collapse
       defaultActiveKey={['1']}
