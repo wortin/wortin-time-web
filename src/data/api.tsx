@@ -18,3 +18,25 @@ export function Get(url: string, success: (data: any) => void) {
       console.log(e);
     });
 }
+
+export function Post(url: string, data: Object, success: (data: any) => void) {
+  fetch(APIHost + url, {
+    method: 'POST',
+    mode: 'cors',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(data),
+  })
+    .then((res) => res.json())
+    .then((r) => {
+      if (r.code != 50000) {
+        message.error(r.message);
+      } else {
+        success(r.data);
+      }
+    })
+    .catch((e) => {
+      console.log(e);
+    });
+}

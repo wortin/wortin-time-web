@@ -20,7 +20,7 @@ export const ProEdit: React.FC<{}> = ({}) => {
         />
       </Row>
       <Row style={{ margin: '10px 0' }} />
-      <Row align={'middle'} style={{ margin: '10px 0' }}>
+      <Row align={'middle'} style={{ margin: '15px 0', height: '28px' }}>
         <Col span={6}>关联目标</Col>
         <Col span={18}>
           <Select
@@ -33,7 +33,7 @@ export const ProEdit: React.FC<{}> = ({}) => {
           </Select>
         </Col>
       </Row>
-      <Row align={'middle'} style={{ margin: '10px 0' }}>
+      <Row align={'middle'} style={{ margin: '15px 0', height: '28px' }}>
         <Col span={6}>计划时间</Col>
         <Col span={18}>
           <DatePicker.RangePicker
@@ -43,7 +43,7 @@ export const ProEdit: React.FC<{}> = ({}) => {
           />
         </Col>
       </Row>
-      <Row align={'top'} style={{ marginTop: '10px' }}>
+      <Row align={'top'} style={{ marginTop: '20px', minHeight: '28px' }}>
         <Col span={6}>项目详情</Col>
         <Col span={18}>
           <TextArea

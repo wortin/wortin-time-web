@@ -30,7 +30,10 @@ export const ListView: React.FC<{}> = () => {
   };
   const Item = cur == -1 ? ProItem : ListContents[cur];
   return (
-    <Row style={{ width: '100%', userSelect: 'none' }}>
+    <Row
+      className={'contentWithMinHeight'}
+      style={{ width: '100%', userSelect: 'none' }}
+    >
       <Col span={6}>
         <div onClick={() => cli(0)} style={{ cursor: 'pointer' }}>
           <TodoMenu
