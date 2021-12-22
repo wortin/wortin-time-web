@@ -1,38 +1,23 @@
-import React, { useState } from 'react';
-import { RouteChildrenProps } from 'react-router';
-import { Col, Row } from 'antd';
-import {
-  ListViewContentMenu,
-  TodoMenu,
-} from '@/components/todo/list_view/menu';
-import {
-  BuildOutlined,
-  BuildTwoTone,
-  CheckCircleOutlined,
-  CheckCircleTwoTone,
-  ProjectTwoTone,
-  ProjectOutlined,
-  DeleteOutlined,
-  DeleteTwoTone,
-  EyeOutlined,
-  EyeTwoTone,
-} from '@ant-design/icons';
-import { ListColl } from '@/components/todo/list_view/listcoll';
-import { TodayItem } from '@/components/todo/list_view/today/item';
-import { ActItem } from '@/components/todo/list_view/action/actitem';
-import { DoneItem } from '@/components/todo/list_view/done/item';
-import { DeletedItem } from '@/components/todo/list_view/deleted/item';
-import { TriflesItem } from '@/components/todo/list_view/trifles/item';
-import { ProItem } from '@/components/todo/list_view/project/proitem';
+import React, {useState} from 'react';
+import {RouteChildrenProps} from 'react-router';
+import {Col, Row} from 'antd';
+import {ListViewContentMenu, TodoMenu,} from '@/components/todo/list_view/menu';
+import {BuildOutlined, BuildTwoTone, CheckCircleOutlined, CheckCircleTwoTone, ProjectTwoTone, ProjectOutlined, DeleteOutlined, DeleteTwoTone, EyeOutlined, EyeTwoTone,} from '@ant-design/icons';
+import {ListColl} from '@/components/todo/list_view/listcoll';
+import {TodayItem} from '@/components/todo/list_view/today/item';
+import {ActItem} from '@/components/todo/list_view/action/actitem';
+import {DoneItem} from '@/components/todo/list_view/done/item';
+import {DeletedItem} from '@/components/todo/list_view/deleted/item';
+import {TriflesItem} from '@/components/todo/list_view/trifles/item';
+import {ProItem} from '@/components/todo/list_view/project/proitem';
 
 type ListViewContentProps = RouteChildrenProps & {};
 
-interface ListViewContentState {}
+interface ListViewContentState {
+}
 
-export class ListViewContentC extends React.Component<
-  ListViewContentProps,
-  ListViewContentState
-> {
+export class ListViewContentC extends React.Component<ListViewContentProps,
+  ListViewContentState> {
   public constructor(props: ListViewContentProps) {
     super(props);
   }
@@ -44,7 +29,7 @@ export class ListViewContentC extends React.Component<
     return (
       <Row
         className={'contentWithMinHeight'}
-        style={{ width: '100%', userSelect: 'none' }}
+        style={{width: '100%', userSelect: 'none'}}
       >
         <Col span={6}>
           <ListViewContentMenu
@@ -129,10 +114,10 @@ export const ListView: React.FC<{}> = () => {
   return (
     <Row
       className={'contentWithMinHeight'}
-      style={{ width: '100%', userSelect: 'none' }}
+      style={{width: '100%', userSelect: 'none'}}
     >
       <Col span={6}>
-        <div onClick={() => cli(0)} style={{ cursor: 'pointer' }}>
+        <div onClick={() => cli(0)} style={{cursor: 'pointer'}}>
           <TodoMenu
             activeIcon={EyeTwoTone}
             icon={EyeOutlined}
@@ -141,7 +126,7 @@ export const ListView: React.FC<{}> = () => {
             isActive={activeMap.get(0)}
           />
         </div>
-        <div onClick={() => cli(1)} style={{ cursor: 'pointer' }}>
+        <div onClick={() => cli(1)} style={{cursor: 'pointer'}}>
           <TodoMenu
             activeIcon={BuildTwoTone}
             icon={BuildOutlined}
@@ -151,9 +136,9 @@ export const ListView: React.FC<{}> = () => {
           />
         </div>
         <div>
-          <ListColl />
+          <ListColl/>
         </div>
-        <div onClick={() => cli(2)} style={{ cursor: 'pointer' }}>
+        <div onClick={() => cli(2)} style={{cursor: 'pointer'}}>
           <TodoMenu
             activeIcon={CheckCircleTwoTone}
             icon={CheckCircleOutlined}
@@ -162,7 +147,7 @@ export const ListView: React.FC<{}> = () => {
             isActive={activeMap.get(2)}
           />
         </div>
-        <div onClick={() => cli(3)} style={{ cursor: 'pointer' }}>
+        <div onClick={() => cli(3)} style={{cursor: 'pointer'}}>
           <TodoMenu
             activeIcon={DeleteTwoTone}
             icon={DeleteOutlined}
@@ -180,10 +165,10 @@ export const ListView: React.FC<{}> = () => {
           borderRight: '0.5px solid #ddd',
         }}
       >
-        <Item />
+        <Item/>
       </Col>
       <Col span={9}>
-        <ActItem />
+        <ActItem/>
       </Col>
     </Row>
   );
