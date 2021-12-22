@@ -1,7 +1,7 @@
 import React, { KeyboardEvent, useState } from 'react';
 import { Col, Collapse, Input, List, Row } from 'antd';
 import { Get, Post } from '@/data/api';
-import styles from '@/components/todo/list-view/listcoll.less';
+import styles from '@/components/todo/list_view/listcoll.less';
 
 const pageSize: number = 10;
 let isInit: boolean = true;

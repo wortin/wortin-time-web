@@ -2,14 +2,10 @@ import AppLayoutC, { AppLayoutMenuInf } from '@/components/app_layout';
 import React from 'react';
 import { ToDoContentC } from '@/components/todo/todo_content';
 import { RouteChildrenProps } from 'react-router';
-import styles from './index.less';
+import './index.less';
 
 export default function IndexPage(props: RouteChildrenProps) {
-  return (
-    <div>
-      <Index {...props} />
-    </div>
-  );
+  return <Index {...props} />;
 }
 
 type IndexProps = RouteChildrenProps & {};

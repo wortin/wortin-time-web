@@ -63,7 +63,13 @@ export default class AppLayoutC extends React.Component<
             })}
           </Menu>
         </Header>
-        <Content style={{ padding: '50px 50px 0px 50px', marginTop: 64 }}>
+        <Content
+          style={{
+            padding: '50px 50px 0px 50px',
+            marginTop: 64,
+            minHeight: '280px',
+          }}
+        >
           <div className={styles.content}>
             <AppContent {...this.props} />
           </div>

@@ -4,24 +4,26 @@ import { Col, Row } from 'antd';
 import {
   ListViewContentMenu,
   TodoMenu,
-} from '@/components/todo/list-view/menu';
+} from '@/components/todo/list_view/menu';
 import {
   BuildOutlined,
   BuildTwoTone,
   CheckCircleOutlined,
   CheckCircleTwoTone,
+  ProjectTwoTone,
+  ProjectOutlined,
   DeleteOutlined,
   DeleteTwoTone,
   EyeOutlined,
   EyeTwoTone,
 } from '@ant-design/icons';
-import { ListColl } from '@/components/todo/list-view/listcoll';
-import { TodayItem } from '@/components/todo/list-view/today/item';
-import { ActItem } from '@/components/todo/list-view/action/actitem';
-import { DoneItem } from '@/components/todo/list-view/done/item';
-import { DeletedItem } from '@/components/todo/list-view/deleted/item';
-import { TriflesItem } from '@/components/todo/list-view/trifles/item';
-import { ProItem } from '@/components/todo/list-view/project/proitem';
+import { ListColl } from '@/components/todo/list_view/listcoll';
+import { TodayItem } from '@/components/todo/list_view/today/item';
+import { ActItem } from '@/components/todo/list_view/action/actitem';
+import { DoneItem } from '@/components/todo/list_view/done/item';
+import { DeletedItem } from '@/components/todo/list_view/deleted/item';
+import { TriflesItem } from '@/components/todo/list_view/trifles/item';
+import { ProItem } from '@/components/todo/list_view/project/proitem';
 
 type ListViewContentProps = RouteChildrenProps & {};
 
@@ -36,6 +38,9 @@ export class ListViewContentC extends React.Component<
   }
 
   public render() {
+    // 根据当前path，例如 /todo/list_view/today /todo/list_view/trifles /todo/list_view/done /todo/list_view/deleted
+    // 判断显示的内容
+
     return (
       <Row
         className={'contentWithMinHeight'}
@@ -49,18 +54,22 @@ export class ListViewContentC extends React.Component<
           />
           <ListViewContentMenu
             {...this.props}
-            {...triflesTodoMenuProps}
-            count={''}
-          />
-          <ListColl />
-          <ListViewContentMenu
-            {...this.props}
-            {...doneTodoMenuProps}
+            {...ProjTodoMenuProps}
             count={''}
           />
           <ListViewContentMenu
             {...this.props}
-            {...deleteTodoMenuProps}
+            {...TriflesTodoMenuProps}
+            count={''}
+          />
+          <ListViewContentMenu
+            {...this.props}
+            {...DoneTodoMenuProps}
+            count={''}
+          />
+          <ListViewContentMenu
+            {...this.props}
+            {...DeleteTodoMenuProps}
             count={''}
           />
         </Col>
@@ -69,7 +78,6 @@ export class ListViewContentC extends React.Component<
           style={{
             minHeight: '380px',
             borderLeft: '0.5px solid #ddd',
-            // borderRight: '0.5px solid #ddd',
           }}
         ></Col>
       </Row>
@@ -83,19 +91,25 @@ const TodayTodoMenuProps = {
   text: '今天',
   to: '/todo/list_view/today',
 };
-const triflesTodoMenuProps = {
+const ProjTodoMenuProps = {
+  activeIcon: ProjectTwoTone,
+  icon: ProjectOutlined,
+  text: '项目',
+  to: '/todo/list_view/project',
+};
+const TriflesTodoMenuProps = {
   activeIcon: BuildTwoTone,
   icon: BuildOutlined,
   text: '琐事',
   to: '/todo/list_view/trifles',
 };
-const doneTodoMenuProps = {
+const DoneTodoMenuProps = {
   activeIcon: CheckCircleTwoTone,
   icon: CheckCircleOutlined,
   text: '已完成',
   to: '/todo/list_view/done',
 };
-const deleteTodoMenuProps = {
+const DeleteTodoMenuProps = {
   activeIcon: DeleteTwoTone,
   icon: DeleteOutlined,
   text: '回收站',

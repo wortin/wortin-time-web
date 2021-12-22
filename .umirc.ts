@@ -11,6 +11,11 @@ export default defineConfig({
     },
     { path: '/todo/list_view/today', component: '@/pages/index', exact: true },
     {
+      path: '/todo/list_view/project',
+      component: '@/pages/index',
+      exact: true,
+    },
+    {
       path: '/todo/list_view/trifles',
       component: '@/pages/index',
       exact: true,

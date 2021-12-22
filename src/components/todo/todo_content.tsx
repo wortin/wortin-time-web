@@ -9,7 +9,7 @@ import {
   ToDoViewButtonC,
   TodoViewButtonProps,
 } from '@/components/todo/todo_view_buttion';
-import { ListViewContentC } from '@/components/todo/list-view/list_view_content';
+import { ListViewContentC } from '@/components/todo/list_view/list_view_content';
 import { RouteChildrenProps } from 'react-router';
 
 type ToDoContentProps = RouteChildrenProps & {};
