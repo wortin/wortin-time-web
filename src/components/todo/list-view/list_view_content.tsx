@@ -1,6 +1,10 @@
 import React, { useState } from 'react';
+import { RouteChildrenProps } from 'react-router';
 import { Col, Row } from 'antd';
-import { TodoMenu } from '@/components/todo/list-view/menu';
+import {
+  ListViewContentMenu,
+  TodoMenu,
+} from '@/components/todo/list-view/menu';
 import {
   BuildOutlined,
   BuildTwoTone,
@@ -18,6 +22,85 @@ import { DoneItem } from '@/components/todo/list-view/done/item';
 import { DeletedItem } from '@/components/todo/list-view/deleted/item';
 import { TriflesItem } from '@/components/todo/list-view/trifles/item';
 import { ProItem } from '@/components/todo/list-view/project/proitem';
+
+type ListViewContentProps = RouteChildrenProps & {};
+
+interface ListViewContentState {}
+
+export class ListViewContentC extends React.Component<
+  ListViewContentProps,
+  ListViewContentState
+> {
+  public constructor(props: ListViewContentProps) {
+    super(props);
+  }
+
+  public render() {
+    return (
+      <Row
+        className={'contentWithMinHeight'}
+        style={{ width: '100%', userSelect: 'none' }}
+      >
+        <Col span={6}>
+          <ListViewContentMenu
+            {...this.props}
+            {...TodayTodoMenuProps}
+            count={''}
+          />
+          <ListViewContentMenu
+            {...this.props}
+            {...triflesTodoMenuProps}
+            count={''}
+          />
+          <ListColl />
+          <ListViewContentMenu
+            {...this.props}
+            {...doneTodoMenuProps}
+            count={''}
+          />
+          <ListViewContentMenu
+            {...this.props}
+            {...deleteTodoMenuProps}
+            count={''}
+          />
+        </Col>
+        <Col
+          span={18}
+          style={{
+            minHeight: '380px',
+            borderLeft: '0.5px solid #ddd',
+            // borderRight: '0.5px solid #ddd',
+          }}
+        ></Col>
+      </Row>
+    );
+  }
+}
+
+const TodayTodoMenuProps = {
+  activeIcon: EyeTwoTone,
+  icon: EyeOutlined,
+  text: '今天',
+  to: '/todo/list_view/today',
+};
+const triflesTodoMenuProps = {
+  activeIcon: BuildTwoTone,
+  icon: BuildOutlined,
+  text: '琐事',
+  to: '/todo/list_view/trifles',
+};
+const doneTodoMenuProps = {
+  activeIcon: CheckCircleTwoTone,
+  icon: CheckCircleOutlined,
+  text: '已完成',
+  to: '/todo/list_view/done',
+};
+const deleteTodoMenuProps = {
+  activeIcon: DeleteTwoTone,
+  icon: DeleteOutlined,
+  text: '回收站',
+  to: '/todo/list_view/deleted',
+};
 
 export const ListView: React.FC<{}> = () => {
   const [activeMap, setActiveMap] = useState<Map<number, boolean>>(
@@ -53,7 +136,7 @@ export const ListView: React.FC<{}> = () => {
             isActive={activeMap.get(1)}
           />
         </div>
-        <div onClick={() => cli(-1)}>
+        <div>
           <ListColl />
         </div>
         <div onClick={() => cli(2)} style={{ cursor: 'pointer' }}>

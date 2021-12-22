@@ -1,14 +1,14 @@
 import { Col, Row } from 'antd';
 import React from 'react';
 
-export const ProTitle: React.FC<{}> = ({}) => {
+export const ProTitle: React.FC<ProTileData> = (d) => {
   return (
     <Row style={{ margin: '20px 20px' }} align={'middle'}>
       <Col span={16}>
         <div
           style={{ fontSize: '16px', fontWeight: 'bold', marginRight: '10px' }}
         >
-          项目名X
+          {d.name}
         </div>
       </Col>
       <Col span={8}>
@@ -36,3 +36,7 @@ export const ProTitle: React.FC<{}> = ({}) => {
     </Row>
   );
 };
+
+interface ProTileData {
+  name: string;
+}

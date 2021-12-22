@@ -7,14 +7,17 @@ const pageSize: number = 10;
 let isInit: boolean = true;
 
 export const ListColl: React.FC<{}> = ({}) => {
-  const [projects, setProjects] = useState([]);
+  const [projects, setProjects] = useState<Array<Projects>>([]);
   const [total, setTotal] = useState<number>(0);
+  const [isInit, setIsInit] = useState<boolean>(true);
+  const [pageNo, setPageNo] = useState<number>(1);
+  const [creProName, setCreProName] = useState<string>('');
   if (isInit) {
-    Get('/projects?pageNo=1&pageSize=' + pageSize, function (d) {
+    Get('/projects?pageNo=' + pageNo + '&pageSize=' + pageSize, function (d) {
       setProjects(d.projects);
       setTotal(d.total);
     });
-    isInit = false;
+    setIsInit(false);
   }
   return (
     <Collapse
@@ -26,7 +29,8 @@ export const ListColl: React.FC<{}> = ({}) => {
         borderBottom: '0.5px solid #ddd',
       }}
     >
-      <Collapse.Panel header={'项目'} key={'1'} extra={'0/5'}>
+      <Collapse.Panel header={'项目'} key={'1'} extra={total}>
+        {/*输入框*/}
         <div style={{ marginBottom: '20px' }}>
           <Input
             placeholder="输入项目名，回车即可创建"
@@ -37,9 +41,19 @@ export const ListColl: React.FC<{}> = ({}) => {
               padding: '5px 10px',
               width: '100%',
             }}
-            onPressEnter={createProject}
+            onChange={(e) => {
+              setCreProName(e.target.value);
+            }}
+            onPressEnter={(e) => {
+              Post('/project', { projectName: e.currentTarget.value }, (d) => {
+                setIsInit(true);
+                setCreProName('');
+              });
+            }}
+            value={creProName}
           />
         </div>
+        {/*项目列表*/}
         <div className={styles.listDiv}>
           <List
             size={'small'}
@@ -51,17 +65,19 @@ export const ListColl: React.FC<{}> = ({}) => {
                   function (d) {
                     setProjects(d.projects);
                     setTotal(d.total);
+                    setPageNo(page);
                   },
                 );
               },
               pageSize: pageSize,
               size: 'small',
               total: total,
+              current: pageNo,
             }}
             bordered={false}
             split={false}
             renderItem={(item) => (
-              <List.Item>
+              <List.Item onClick={(e) => {}}>
                 <Row style={{ width: '100%' }}>
                   <Col span={18}>{item.name}</Col>
                   <Col span={6}>
@@ -87,7 +103,7 @@ export const ListColl: React.FC<{}> = ({}) => {
               padding: '5px 10px',
               width: '100%',
             }}
-            onPressEnter={createProject}
+            onPressEnter={(e) => {}}
           />
         </div>
         <div className={styles.listDiv}>
@@ -119,11 +135,15 @@ export const ListColl: React.FC<{}> = ({}) => {
   );
 };
 
-const createProject = (e: KeyboardEvent<HTMLInputElement>) => {
-  const value = e.currentTarget.value;
-  Post('/project', { projectName: value }, (d) => {
-    console.log(d);
-  });
-};
-
-const queryProjects = (pageNo: number, pageSize: number) => {};
+interface Projects {
+  id: number;
+  name: string;
+  targetID: number;
+  planedStartDate: string;
+  planedEndDate: string;
+  desc: string;
+  state: number;
+  actionCount: number;
+  completedActionCount: number;
+  targetName: string;
+}
