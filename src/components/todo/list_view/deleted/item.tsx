@@ -5,7 +5,7 @@ import { Title } from '@/components/todo/list_view/common/title';
 
 export const DeletedItem: React.FC<{}> = ({}) => {
   return (
-    <div>
+    <div className={'listViewContentSecondColDiv'}>
       <Title title={'回收站'} />
       <DeletedEdit />
       <DeletedAct />

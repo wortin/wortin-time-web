@@ -5,7 +5,7 @@ import { Title } from '@/components/todo/list_view/common/title';
 
 export const DoneItem: React.FC<{}> = ({}) => {
   return (
-    <div>
+    <div className={'listViewContentSecondColDiv'}>
       <Title title={'已完成'} />
       <DoneEdit />
       <DoneAct />
