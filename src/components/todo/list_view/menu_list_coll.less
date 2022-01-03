@@ -4,26 +4,26 @@
   border-bottom: 0.5px solid #ddd;
 }
 
-.projNameInput {
-  border: none;
-  background: #eee;
-  padding: 5px 10px;
-  width: 100%;
+.inputDiv {
+  input.ant-input {
+    border: none;
+    background: #eee;
+    padding: 5px 10px;
+    width: 100%;
+  }
 }
 
 .listDiv {
-  :global {
-    .ant-list-pagination {
-      margin-top: 16px;
-    }
+  .ant-list-pagination {
+    margin-top: 16px;
+  }
 
-    .ant-pagination-prev .ant-pagination-item-link,
-    .ant-pagination-next .ant-pagination-item-link {
-      border: none;
-    }
+  .ant-pagination-prev .ant-pagination-item-link,
+  .ant-pagination-next .ant-pagination-item-link {
+    border: none;
+  }
 
-    .ant-pagination-item {
-      border: none;
-    }
+  li.ant-pagination-item {
+    border: none;
   }
 }

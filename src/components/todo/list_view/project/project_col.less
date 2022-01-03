@@ -1,0 +1,77 @@
+@import '../list_view_content.less';
+
+.projectCol {
+  margin-left: @SecondColDivMarginLR;
+  margin-right: @SecondColDivMarginLR;
+
+  .editDiv {
+    color: #87898a;
+    margin: 10px 0px;
+  }
+
+  input.ant-input {
+    border: none;
+    background: #eee;
+    padding: 5px 10px;
+    width: 100%;
+  }
+
+  .divider {
+    margin: 10px 0px;
+  }
+
+  .ant-row.ant-row-middle.targetRow {
+    margin: 15px 0;
+    height: 28px;
+  }
+
+  .targetRow {
+    .ant-select {
+      width: 100%;
+    }
+  }
+
+  .ant-row.ant-row-middle.planedTimeRow {
+    margin: 15px 0;
+    height: 28px;
+  }
+
+  .planedTimeRow {
+    .ant-picker {
+      width: 100%;
+    }
+  }
+
+  .ant-row.ant-row-top.projDescRow {
+    margin-top: 20px;
+    min-height: 28px;
+  }
+
+  .projDescRow {
+    textarea.ant-input {
+      width: 100%;
+      border: none;
+      padding: 0 8px;
+    }
+  }
+
+  .dividerLine {
+    margin-top: 20px;
+    border-bottom: 0.5px solid #ddd;
+  }
+
+  .actionDiv {
+    .actionListRow {
+      width: 100%;
+    }
+
+    .actionDetailDiv {
+      font-size: 12px;
+      color: #9f9f9f;
+    }
+
+    .count {
+      float: right;
+    }
+  }
+}

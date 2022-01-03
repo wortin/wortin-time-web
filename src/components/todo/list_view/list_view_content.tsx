@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { ComponentClass } from 'react';
 import { RouteChildrenProps } from 'react-router';
 import { Col, Row } from 'antd';
 import { ListViewContentMenu } from '@/components/todo/list_view/menu';
@@ -18,13 +18,18 @@ import { TodayItem } from '@/components/todo/list_view/today/item';
 import { DoneItem } from '@/components/todo/list_view/done/item';
 import { DeletedItem } from '@/components/todo/list_view/deleted/item';
 import { TriflesItem } from '@/components/todo/list_view/trifles/item';
-import { ProItem } from '@/components/todo/list_view/project/proitem';
 import './list_view_content.less';
 import MenuListColl from '@/components/todo/list_view/menu_list_coll';
+import TodayCol from '@/components/todo/list_view/today/today_col';
+import ProjectCol from '@/components/todo/list_view/project/project_col';
+import ProjectDoneCol from '@/components/todo/list_view/project/project_done_col';
+import ProjectDeletedCol from '@/components/todo/list_view/project/project_deleted_col';
 
 type ListViewContentProps = RouteChildrenProps & {};
 
-interface ListViewContentState {}
+interface ListViewContentState {
+  curCol: ComponentClass<any, any>;
+}
 
 export class ListViewContentC extends React.Component<
   ListViewContentProps,
@@ -32,12 +37,46 @@ export class ListViewContentC extends React.Component<
 > {
   public constructor(props: ListViewContentProps) {
     super(props);
-    this.state = {};
+    this.state = {
+      curCol: TodayCol,
+    };
+  }
+
+  public componentDidMount() {
+    this.updateByPath();
+  }
+
+  public componentDidUpdate(
+    prevProps: Readonly<ListViewContentProps>,
+    prevState: Readonly<ListViewContentState>,
+    snapshot?: any,
+  ) {
+    if (prevProps.match?.url != this.props.match?.url) {
+      this.updateByPath();
+    }
+  }
+
+  private updateByPath() {
+    // 根据当前path，例如 /todo/list_view/today /todo/list_view/trifles /todo/list_view/done /todo/list_view/deleted
+    // 判断显示的内容
+    let path: string =
+      this.props.match?.path == undefined ? '' : this.props.match?.path;
+    if (path == '/todo/list_view/today') {
+      // 显示 today
+    } else if (path == '/todo/list_view/project/:project_id/done') {
+      this.setState({ curCol: ProjectDoneCol });
+    } else if (path == '/todo/list_view/project/:project_id/deleted') {
+      this.setState({ curCol: ProjectDeletedCol });
+    } else if (
+      path == '/todo/list_view/project/:project_id' ||
+      path == '/todo/list_view/project/:project_id/action/:action_id'
+    ) {
+      // 显示 project
+      this.setState({ curCol: ProjectCol });
+    }
   }
 
   public render() {
-    // 根据当前path，例如 /todo/list_view/today /todo/list_view/trifles /todo/list_view/done /todo/list_view/deleted
-    // 判断显示的内容
     return (
       <Row className={'listViewContent'}>
         <Col span={6}>
@@ -64,7 +103,7 @@ export class ListViewContentC extends React.Component<
           />
         </Col>
         <Col span={18} className={'listViewContentSecondCol'}>
-          <ProItem />
+          <this.state.curCol {...this.props} />
         </Col>
       </Row>
     );

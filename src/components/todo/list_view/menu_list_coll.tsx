@@ -1,8 +1,9 @@
-import { Col, Collapse, Input, List, Row } from 'antd';
+import { Col, Collapse, Form, Input, List, Row } from 'antd';
 import React from 'react';
 import { RouteChildrenProps } from 'react-router';
 import './menu_list_coll.less';
 import { Get, Post } from '@/data/api';
+import { Link } from 'umi';
 
 export type MenuListCollProps = RouteChildrenProps & {};
 
@@ -11,6 +12,7 @@ export interface MenuListCollState {
   projects: Array<Projects>;
   total: number;
   pageNo: number;
+  selectedProjectID: number;
 }
 
 interface Projects {
@@ -39,17 +41,33 @@ class MenuListColl extends React.Component<
       projects: [],
       total: 0,
       pageNo: 1,
+      selectedProjectID: -1,
     };
   }
 
   public componentDidMount() {
     this.queryProjects(this, 1);
+    this.updateByPath();
+  }
+
+  public componentDidUpdate(
+    prevProps: Readonly<MenuListCollProps>,
+    prevState: Readonly<MenuListCollState>,
+    snapshot?: any,
+  ) {
+    if (prevProps.match?.url != this.props.match?.url) {
+      this.updateByPath();
+    }
   }
 
   private createProject(projectName: string) {
-    Post('/project', { projectName: projectName }, (d) => {
-      this.setState({ creProName: '' });
-    });
+    if (projectName) {
+      Post('/project', { projectName: projectName }, (d) => {
+        this.setState({ creProName: '', pageNo: 1 });
+        this.queryProjects(this, this.state.pageNo);
+        this.props.history.push('/todo/list_view/project/' + d);
+      });
+    }
   }
 
   private queryProjects(that: MenuListColl, pageNo: number) {
@@ -62,20 +80,48 @@ class MenuListColl extends React.Component<
     });
   }
 
+  private updateByPath() {
+    let path = this.props.match?.path;
+    if (
+      path == '/todo/list_view/project/:project_id' ||
+      path == '/todo/list_view/project/:project_id/action/:action_id'
+    ) {
+      // @ts-ignore
+      this.setState({ selectedProjectID: this.props.match.params.project_id });
+      this.queryProjects(this, this.state.pageNo);
+    }
+  }
+
   public render() {
     return (
       <div className={'coll'}>
         <Collapse defaultActiveKey={['project']} ghost>
-          <Collapse.Panel header={'项目'} key={'project'} extra={'1'}>
-            <div style={{ marginBottom: '20px' }}>
-              <Input
-                className={'projNameInput'}
-                placeholder="输入项目名，回车即可创建"
-                bordered={false}
-                onChange={(e) => this.setState({ creProName: e.target.value })}
-                onPressEnter={(e) => this.createProject(e.currentTarget.value)}
-                value={''}
-              />
+          <Collapse.Panel
+            header={'项目'}
+            key={'project'}
+            extra={this.state.total}
+          >
+            <div className={'inputDiv'} style={{ marginBottom: '20px' }}>
+              <Form>
+                <Form.Item
+                  name={'projectName'}
+                  rules={[{ required: true, message: '项目名不能为空' }]}
+                >
+                  <Input
+                    className={'projNameInput'}
+                    placeholder="输入项目名，回车即可创建"
+                    bordered={false}
+                    onChange={(e) =>
+                      this.setState({ creProName: e.target.value })
+                    }
+                    onPressEnter={(e) =>
+                      this.createProject(e.currentTarget.value)
+                    }
+                    value={this.state.creProName}
+                    autoComplete={'off'}
+                  />
+                </Form.Item>
+              </Form>
             </div>
             {/*项目列表*/}
             <div className={'listDiv'}>
@@ -89,18 +135,28 @@ class MenuListColl extends React.Component<
                   total: this.state.total,
                   current: this.state.pageNo,
                 }}
+                locale={{ emptyText: '暂无项目' }}
                 bordered={false}
                 split={false}
                 renderItem={(item) => (
-                  <List.Item onClick={(e) => {}}>
-                    <Row style={{ width: '100%' }}>
-                      <Col span={18}>{item.name}</Col>
-                      <Col span={6}>
-                        <div style={{ float: 'right' }}>
-                          {item.completedActionCount + '/' + item.actionCount}
-                        </div>
-                      </Col>
-                    </Row>
+                  <List.Item key={item.id}>
+                    <Link
+                      to={'/todo/list_view/project/' + item.id}
+                      style={
+                        item.id == this.state.selectedProjectID
+                          ? { width: '100%' }
+                          : { width: '100%', color: '#444' }
+                      }
+                    >
+                      <Row>
+                        <Col span={18}>{item.name}</Col>
+                        <Col span={6}>
+                          <div style={{ float: 'right' }}>
+                            {item.completedActionCount + '/' + item.actionCount}
+                          </div>
+                        </Col>
+                      </Row>
+                    </Link>
                   </List.Item>
                 )}
               />
